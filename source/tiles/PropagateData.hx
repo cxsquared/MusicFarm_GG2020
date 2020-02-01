@@ -35,7 +35,9 @@ class PropagateData {
 
     public function checkFinished() {
         if (length == totalTiles && !finished) {
-            origin.start = true;
+            if (origin != null) {
+                origin.start = true;
+            }
             finished = true;
         }
     }

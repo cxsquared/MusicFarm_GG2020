@@ -6,6 +6,7 @@ import flixel.FlxState;
 import flixel.FlxG;
 import characters.Player;
 import ui.FlowerPicker;
+import flixel.FlxSprite;
 
 class PlayState extends FlxState
 {
@@ -16,13 +17,19 @@ class PlayState extends FlxState
 
 	private var noteManager = new NoteManager();
 
+	private var background = new FlxSprite();
+
 	override public function create():Void
 	{
 		super.create();
 
+		background.loadGraphic("assets/images/background.png");
+		background.setPosition(-32, -32);
+		add(background);
+
 		map = new MapController();
 
-		FlxG.worldBounds.set(map.tilemap.x, map.tilemap.y, map.tilemap.width, map.tilemap.height);
+		FlxG.worldBounds.set(background.x, background.y, background.width, background.height);
 
 		FlxG.camera.zoom = 2;
 		FlxG.camera.follow(map.tilemap);
