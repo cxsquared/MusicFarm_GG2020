@@ -9,6 +9,7 @@ class PropagateData {
     public var totalTiles:Int;
     private var tilesSeen = new Map<Int, Tile>();
     public var length = 0;
+    public var finished:Bool = false;
 
     public function new(Origin:ActivatorTile, TotalTiles:Int) {
         totalTiles = TotalTiles;
@@ -27,8 +28,9 @@ class PropagateData {
     }
 
     public function checkFinished() {
-        if (length == totalTiles) {
+        if (length == totalTiles && !finished) {
             origin.start = true;
+            finished = true;
         }
     }
 }

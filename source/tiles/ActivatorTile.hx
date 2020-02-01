@@ -10,12 +10,7 @@ class ActivatorTile extends Tile {
         super(Tilemap, Index);
     }
 
-    public override function tryActivate() {
-        activate();
-        propagate();
-    }
-
-    private function activate() {
+    public function tryStart() {
         if (!start)
             return;
 
@@ -27,7 +22,7 @@ class ActivatorTile extends Tile {
 
         var pd = new PropagateData(this, tilemap.length());
         for(tile in neighbors) {
-            tile.setActivate(pd);
+            tile.setActivate(pd, false);
         }
     }
 }

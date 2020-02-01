@@ -35,8 +35,14 @@ class FlowerMapData {
     public function pulse(t:FlxTimer) {
         FlxG.watch.addQuick("pulse", pulseCount++);
 
-        for(i in 0...length()-1) {
-            tileData[i].tryActivate();
+        for(tile in tileData) {
+            tile.tryActivate();
+        }
+
+        for(i in tilemap.getTileInstances(1)) {
+            if (Std.is(tileData[i], ActivatorTile)) {
+                cast(tileData[i], ActivatorTile).tryStart();
+            }
         }
 
         timer.start(getDelay(), pulse);

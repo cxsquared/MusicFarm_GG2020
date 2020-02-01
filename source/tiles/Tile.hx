@@ -7,6 +7,8 @@ class Tile {
 
     public var id:Int;
     public var shouldActivate:Bool = false;
+    public var delayActivate:Bool = false;
+
     public var propagations = new Array<PropagateData>();
     public var tilemap:FlowerMapData;
     public var index:Int;
@@ -30,12 +32,17 @@ class Tile {
     }
 
     private function propagate() {
+        if (delayActivate) {
+            delayActivate = false;
+            return;
+        }
+
         if (!shouldActivate)
             return;
 
-        onActivate();
-
         shouldActivate = false;
+
+        onActivate();
 
         var neighbors = getNeighbors();
 
@@ -44,7 +51,7 @@ class Tile {
             // Ugh don't like this nested for
             for(neighbor in neighbors) {
                 if (!pd.contains(neighbor)) {
-                    neighbor.setActivate(pd);
+                    neighbor.setActivate(pd, neighbor.id > id);
                 }
             }
 
@@ -52,9 +59,10 @@ class Tile {
         }
     }
 
-    public function setActivate(Data:PropagateData) {
+    public function setActivate(Data:PropagateData, Delay:Bool) {
         Data.add(this);
         propagations.push(Data);
+        delayActivate = Delay;
         shouldActivate = true;
     }
 
