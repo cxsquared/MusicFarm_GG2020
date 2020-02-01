@@ -5,8 +5,8 @@ import flixel.tile.FlxTilemap;
 import flixel.util.FlxTimer;
 
 class MapController {
-    static inline var TILE_WIDTH = 16;
-    static inline var TILE_HEIGHT = 16;
+    public static inline var TILE_WIDTH = 16;
+    public static inline var TILE_HEIGHT = 16;
 
     static var MAP = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
                       0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
@@ -73,13 +73,25 @@ class MapController {
         return (60000/bpm)/1000;
     }
 
+    public function setTile(X:Int, Y:Int, Tile:Tile) {
+        if (!inRange(X, Y))
+            return;
+
+        tilemap.setTile(X, Y, Tile.tileType);
+        tileData[coordsToIndex(X, Y)] = Tile;
+    }
+
+    private function inRange(X:Int, Y:Int):Bool {
+        return coordsToIndex(X, Y) < tilemap.totalTiles;
+    }
+
     public function getTile(X:Int, Y:Int):Tile {
-        return tileData[X + (Y * width())];
+        return tileData[coordsToIndex(X, Y)];
     }
     
     public function getTileCoordsByIndex(Index:Int):FlxPoint {
-        var x = Index % tilemap.widthInTiles;
-        var y = Index/tilemap.widthInTiles;
+        var x = Index % width();
+        var y = Index / width();
 
 
         return FlxPoint.weak(x, y);
@@ -95,6 +107,10 @@ class MapController {
 
     public function length():Int {
         return tileData.length;
+    }
+
+    public function coordsToIndex(X:Int, Y:Int):Int {
+        return X + (Y * width());
     }
 
 }

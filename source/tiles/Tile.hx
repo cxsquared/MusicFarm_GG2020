@@ -5,6 +5,7 @@ import flixel.FlxG;
 class Tile {
     static var lastUsedId = 0;
 
+    public var tileType = 0;
     public var id:Int;
     public var shouldActivate:Bool = false;
     public var delayActivate:Bool = false;
