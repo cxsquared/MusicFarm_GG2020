@@ -1,26 +1,25 @@
 package tiles;
 
+import music.NoteManager;
+import music.NoteManager.NoteLengthType;
 import flixel.FlxG;
 
 class ActivatorTile extends Tile {
 
     public var start:Bool = true;
-    public var noteLength = 1;
+    public var noteLength:NoteLengthType;
 
-    public function new(Tilemap:MapController, Index:Int) {
+    public function new(Tilemap:MapController, Index:Int, NoteLength:NoteLengthType=NoteLengthType.Quarter) {
         super(Tilemap, Index);
 
-        //TODO:Remove this once we get placement stuff
-        noteLength = FlxG.random.int(1, 4); 
+        noteLength = NoteLength; 
 
         tileType = 1;
     }
 
     public function tryStart(beat:Int) {
-        if (!start || beat % noteLength != 0)
+        if (!start || beat % cast(noteLength, Int) != 0)
             return;
-
-        FlxG.log.add("Starting activator " + id);
 
         start = false;
 

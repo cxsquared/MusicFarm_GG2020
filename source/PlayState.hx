@@ -1,5 +1,6 @@
 package;
 
+import music.NoteManager;
 import tiles.*;
 import flixel.FlxState;
 import flixel.FlxG;
@@ -12,6 +13,8 @@ class PlayState extends FlxState
 
 	private var player:Player;
 	private var fp:FlowerPicker;
+
+	private var noteManager = new NoteManager();
 
 	override public function create():Void
 	{
