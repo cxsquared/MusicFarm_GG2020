@@ -25,6 +25,5 @@ class NoteTile extends Tile {
         } else {
             FlxG.log.error('can\'t play not for ${Std.int(tilemap.getTileCoordsByIndex(index).y)}');
         }
-        FlxG.log.add("Activating note");
     }
 }

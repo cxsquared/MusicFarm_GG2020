@@ -20,8 +20,6 @@ class ActivatorTile extends Tile {
         if (!start || beat % noteLength != 0)
             return;
 
-        FlxG.log.add("Starting activator " + id);
-
         start = false;
 
         var neighbors = getNeighbors();
