@@ -7,7 +7,6 @@ class Tile {
 
     public var tileType = 0;
     public var id:Int;
-    public var shouldActivate:Bool = false;
     public var delayActivate:Bool = false;
 
     public var propagations = new Array<PropagateData>();
@@ -22,8 +21,8 @@ class Tile {
         id = ++lastUsedId;
     }
 
-    public function tryActivate() {
-        propagate();
+    public function tryActivate(beat:Int) {
+        propagate(beat);
     }
 
     private function onActivate(){
@@ -32,16 +31,14 @@ class Tile {
         FlxG.state.add(new WaterSplash(position.x + coords.x * 16, position.y + coords.y * 16));
     }
 
-    private function propagate() {
+    private function propagate(beat:Int) {
         if (delayActivate) {
             delayActivate = false;
             return;
         }
 
-        if (!shouldActivate)
+        if (propagations.length <= 0)
             return;
-
-        shouldActivate = false;
 
         onActivate();
 
@@ -49,6 +46,7 @@ class Tile {
 
         while(propagations.length > 0) {
             var pd = propagations.pop();
+
             // Ugh don't like this nested for
             for(neighbor in neighbors) {
                 if (!pd.contains(neighbor)) {
@@ -64,7 +62,6 @@ class Tile {
         Data.add(this);
         propagations.push(Data);
         delayActivate = Delay;
-        shouldActivate = true;
     }
 
     public function getNeighbors():Array<Tile> {

@@ -51,21 +51,20 @@ class MapController {
         timer.start(getDelay(), pulse);
     } 
 
-    private var pulseCount = 0;
+    private var beat = 1;
 
     public function pulse(t:FlxTimer) {
-        FlxG.watch.addQuick("pulse", pulseCount++);
-
         for(tile in tileData) {
-            tile.tryActivate();
+            tile.tryActivate(beat);
         }
 
         for(i in tilemap.getTileInstances(1)) {
             if (Std.is(tileData[i], ActivatorTile)) {
-                cast(tileData[i], ActivatorTile).tryStart();
+                cast(tileData[i], ActivatorTile).tryStart(beat);
             }
         }
 
+        beat++;
         timer.start(getDelay(), pulse);
     }
 
