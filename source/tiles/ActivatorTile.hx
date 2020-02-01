@@ -26,7 +26,7 @@ class ActivatorTile extends Tile {
 
         var neighbors = getNeighbors();
 
-        var pd = new PropagateData(this, tilemap.length());
+        var pd = new PropagateData(this, tilemap.length(), noteLength);
         for(tile in neighbors) {
             tile.setActivate(pd, false);
         }

@@ -40,22 +40,26 @@ class Tile {
         if (propagations.length <= 0)
             return;
 
-        onActivate();
-
         var neighbors = getNeighbors();
+        var activate = false;
 
-        while(propagations.length > 0) {
-            var pd = propagations.pop();
-
-            // Ugh don't like this nested for
-            for(neighbor in neighbors) {
-                if (!pd.contains(neighbor)) {
-                    neighbor.setActivate(pd, neighbor.id > id);
+        for(pd in propagations) {
+            if (pd.shouldPropagate(beat)) {
+                activate = true;
+                // Ugh don't like this nested for
+                for(neighbor in neighbors) {
+                    if (!pd.contains(neighbor)) {
+                        neighbor.setActivate(pd, neighbor.id > id);
+                    }
                 }
-            }
 
-            pd.checkFinished();
+                propagations.remove(pd);
+                pd.checkFinished();
+            }
         }
+
+        if (activate)
+            onActivate();
     }
 
     public function setActivate(Data:PropagateData, Delay:Bool) {

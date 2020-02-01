@@ -10,11 +10,12 @@ class PropagateData {
     private var tilesSeen = new Map<Int, Tile>();
     public var length = 0;
     public var finished:Bool = false;
-    public var beatToMove = 1;
+    public var noteLength = 1;
 
-    public function new(Origin:ActivatorTile, TotalTiles:Int) {
+    public function new(Origin:ActivatorTile, TotalTiles:Int, NoteLength:Int) {
         totalTiles = TotalTiles;
         origin = Origin;
+        noteLength = NoteLength;
 
         add(origin);
     }
@@ -25,7 +26,7 @@ class PropagateData {
     }
 
     public function shouldPropagate(beat:Int) {
-        return beat % beatToMove == 0;
+        return beat % noteLength == 0;
     }
 
     public function contains(tile:Tile):Bool {
