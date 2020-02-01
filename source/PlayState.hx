@@ -5,6 +5,7 @@ import tiles.*;
 import flixel.FlxState;
 import flixel.FlxG;
 import characters.Player;
+import ui.InventoryUI;
 import ui.FlowerPicker;
 import flixel.FlxSprite;
 
@@ -13,6 +14,7 @@ class PlayState extends FlxState
 	public var map:MapController;
 
 	private var player:Player;
+	private var inventoryUI:InventoryUI;
 	private var fp:FlowerPicker;
 
 	private var noteManager = new NoteManager();
@@ -27,6 +29,14 @@ class PlayState extends FlxState
 		background.setPosition(-32, -32);
 		add(background);
 
+		//inventoryUI = new InventoryUI();
+		//add(inventoryUI);
+
+		fp = new FlowerPicker();
+		add(fp);
+		fp.actionSignal.add(playerAction);
+
+
 		map = new MapController();
 
 		FlxG.worldBounds.set(background.x, background.y, background.width, background.height);
@@ -37,12 +47,8 @@ class PlayState extends FlxState
 		//Cluttering things up because that's how I am
 		player = new Player();
 		add(player);
-		player.actionSignal.add(playerAction);
 
 		FlxG.camera.follow(player);
-
-		fp = new FlowerPicker();
-		add(fp);
 	}
 
 	private function playerAction(action:String):Void {
@@ -50,7 +56,7 @@ class PlayState extends FlxState
 		var x = Std.int(player.x / MapController.TILE_WIDTH);
 		var y = Std.int(player.y / MapController.TILE_HEIGHT);
 
-		doAction("note", x, y);
+		doAction(action, x, y);
 	}
 
 	private function doAction(action:String,x:Int, y:Int) {

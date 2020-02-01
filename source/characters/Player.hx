@@ -45,7 +45,7 @@ class Player extends FlxSprite {
         _down = FlxG.keys.anyPressed([DOWN, S]);
         _left = FlxG.keys.anyPressed([LEFT, A]);
         _right = FlxG.keys.anyPressed([RIGHT, D]);
-        _action =  FlxG.keys.anyJustPressed([SPACE]);
+       // _action =  FlxG.keys.anyJustPressed([SPACE]);
 
         if (_up) {
 			animation.play("Up");
