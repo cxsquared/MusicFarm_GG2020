@@ -49,12 +49,12 @@ class Tile {
                 // Ugh don't like this nested for
                 for(neighbor in neighbors) {
                     if (!pd.contains(neighbor)) {
-                        neighbor.setActivate(pd, neighbor.id > id);
+                        neighbor.setActivate(pd, neighbor.index >= index);
                     }
                 }
 
-                propagations.remove(pd);
                 pd.checkFinished();
+                propagations.remove(pd);
             }
         }
 

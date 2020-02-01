@@ -55,13 +55,19 @@ class MapController {
     private var beat = 1;
 
     public function pulse(t:FlxTimer) {
+        var hasActivators = false;
         for(tile in tileData) {
+            if (Std.is(tile, ActivatorTile))
+                hasActivators = true;
+
             tile.tryActivate(beat);
         }
 
-        for(i in tilemap.getTileInstances(1)) {
-            if (Std.is(tileData[i], ActivatorTile)) {
-                cast(tileData[i], ActivatorTile).tryStart(beat);
+        if (hasActivators)  {
+            for(i in tilemap.getTileInstances(1)) {
+                if (Std.is(tileData[i], ActivatorTile)) {
+                    cast(tileData[i], ActivatorTile).tryStart(beat);
+                }
             }
         }
 
