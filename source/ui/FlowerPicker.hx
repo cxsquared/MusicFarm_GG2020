@@ -1,21 +1,45 @@
 package ui;
 
+import js.lib.Object;
+import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.FlxG;
+import flixel.tweens.FlxTween;
+import flixel.tweens.FlxEase;
+import ui.InventoryAction;
+import flixel.util.FlxSignal;
 
-class FlowerPicker extends FlxSprite {
+class FlowerPicker extends FlxGroup {
 
-    private var flowers:Array<Int>;
+    private var flowers:Array<FlxSprite>;
     private var curIndex:Int = 0;
+    private var tween:FlxTween;
+    private var inventoryData:Array<IAction>;
+
+    public var actionSignal:FlxTypedSignal<String->Void>;
 
     public function new():Void {
         super();
-        flowers = [1,2];
 
-        this.x = 0;
-        this.y = 0;
-        //fixed UI
-        //this.scrollFactor.set(0,0);
+        actionSignal = new FlxTypedSignal<String->Void>();
+
+
+        inventoryData = [
+            { icon: "assets/images/temp_tiles.png", action: function() { trace("AAAA"); }, aType: "activator" },
+            { icon: "assets/images/temp_tiles.png", action: function() { trace("AAAA"); }, aType: "flower" }
+        ];
+
+        flowers =  new Array<FlxSprite>();
+  
+        for (i in 0...inventoryData.length) {
+            var nSprite = new FlxSprite();
+            //fixed UI
+            nSprite.scrollFactor.set(0,0);
+            nSprite.x = 300 + (i * 30);
+            nSprite.y = 250 ;
+            add(nSprite);
+            flowers.push(nSprite);
+        }
     }
 
     override public function update(elapsed:Float):Void
@@ -27,20 +51,37 @@ class FlowerPicker extends FlxSprite {
     private function s_input():Void {
         var forward:Bool = false;
         var backward:Bool = false;
-        forward = FlxG.keys.anyPressed([F]);
-        backward = FlxG.keys.anyPressed([R]);
+        var _action:Bool = false;
 
-        //bounce anim because why not
+        forward = FlxG.keys.anyJustPressed([F]);
+        backward = FlxG.keys.anyJustPressed([R]);
+        _action =  FlxG.keys.anyJustPressed([SPACE]);
 
-        //move forward
-        if(forward) {
-            curIndex ++;
-            if(curIndex >= flowers.length) curIndex = 0;
-        } else if (backward) {
-            curIndex --;
-            if(curIndex < 0) curIndex = flowers.length - 1;
+
+        if(forward || backward) {
+
+            //stop old animation just in case
+            if(tween != null) tween.cancel();
+
+            //bounce anim because why not
+            FlxTween.tween(flowers[curIndex], { y: 250 }, .7, { ease: FlxEase.quadOut});
+
+            //move forward
+            if(forward) {
+                curIndex ++;
+                if(curIndex >= flowers.length) curIndex = 0;
+            } else if (backward) {
+                curIndex --;
+                if(curIndex < 0) curIndex = flowers.length - 1;
+            }
+
+            //bounce anim because why not
+            tween = FlxTween.tween(flowers[curIndex], { y: 270 }, .7, { ease: FlxEase.quadOut});
         }
 
-        //bounce anim because why not
+
+        if(_action) {
+            actionSignal.dispatch(inventoryData[curIndex].aType);
+        }
     }
 }
