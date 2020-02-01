@@ -64,10 +64,6 @@ class NoteManager {
 
         return instrumentSounds[instrument][pitch];
     }
-
-    public static function getNoteLength(type:NoteLengthType):Int {
-        return cast(type, Int); 
-    }
 }
 
 enum InstrumentType {
@@ -81,9 +77,9 @@ enum InstrumentType {
     Piano;
 }
 
-enum NoteLengthType {
-    Quarter;
-    Half;
-    DottedHalf;
-    Whole;
+enum abstract NoteLengthType(Int) {
+    var Quarter;
+    var Half;
+    var DottedHalf;
+    var Whole;
 }
