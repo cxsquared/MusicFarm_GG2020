@@ -2,13 +2,12 @@ package;
 
 import flixel.FlxState;
 import flixel.FlxG;
-import tiles.FlowerMapData;
 import characters.Player;
 import ui.FlowerPicker;
 
 class PlayState extends FlxState
 {
-	public var map:FlowerMapData;
+	public var map:MapController;
 
 	private var player:Player;
 	private var fp:FlowerPicker;
@@ -19,7 +18,7 @@ class PlayState extends FlxState
 
 		FlxG.camera.zoom = 2;
 
-		map = new FlowerMapData();
+		map = new MapController();
 
 		map.tilemap.setPosition(FlxG.width/2-map.tilemap.width/2, FlxG.height/2-map.tilemap.height/2);
 

@@ -10,10 +10,10 @@ class Tile {
     public var delayActivate:Bool = false;
 
     public var propagations = new Array<PropagateData>();
-    public var tilemap:FlowerMapData;
+    public var tilemap:MapController;
     public var index:Int;
 
-    public function new(Tilemap:FlowerMapData, Index:Int) {
+    public function new(Tilemap:MapController, Index:Int) {
         tilemap = Tilemap;
         index = Index;
 

@@ -6,7 +6,7 @@ class ActivatorTile extends Tile {
 
     public var start:Bool = true;
 
-    public function new(Tilemap:FlowerMapData, Index:Int) {
+    public function new(Tilemap:MapController, Index:Int) {
         super(Tilemap, Index);
     }
 

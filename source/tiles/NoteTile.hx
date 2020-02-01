@@ -3,7 +3,7 @@ package tiles;
 import flixel.FlxG;
 
 class NoteTile extends Tile {
-    public function new(Tilemap:FlowerMapData, Index:Int) {
+    public function new(Tilemap:MapController, Index:Int) {
         super(Tilemap, Index);
     }
 

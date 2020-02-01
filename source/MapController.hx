@@ -1,11 +1,31 @@
-package tiles;
-
 import flixel.FlxG;
+import tiles.*;
 import flixel.math.FlxPoint;
 import flixel.tile.FlxTilemap;
 import flixel.util.FlxTimer;
 
-class FlowerMapData {
+class MapController {
+    static inline var TILE_WIDTH = 16;
+    static inline var TILE_HEIGHT = 16;
+
+    static var MAP = [0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,2,0,0,0,
+                      0,0,0,0,2,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,1,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,1,0,0,0,0,0,0,0,2,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,
+                      0,0,0,0,0,0,0,0,0,0,0,0,0,0,0,0];
+
+
     public var tilemap:FlxTilemap;
     private var tileData = new Array<Tile>();
 
@@ -14,7 +34,8 @@ class FlowerMapData {
     private var timer = new FlxTimer();
 
     public function new() {
-        tilemap = new FlowerMap();
+        tilemap = new FlxTilemap();
+        tilemap.loadMapFromArray(MAP, TILE_WIDTH, TILE_HEIGHT, AssetPaths.temp_tiles__png, TILE_WIDTH, TILE_HEIGHT);
 
         var currIdx = 0;
         for(td in tilemap.getData()) {
