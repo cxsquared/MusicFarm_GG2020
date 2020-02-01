@@ -3,10 +3,12 @@ package characters;
 import flixel.FlxSprite;
 import flixel.FlxObject;
 import flixel.FlxG;
+import flixel.util.FlxSignal;
 
 class Player extends FlxSprite {
 
     private var walkSpeed:Int;
+    public var actionSignal:FlxTypedSignal<String->Void>;
 
     public function new() {
         super();
@@ -14,6 +16,8 @@ class Player extends FlxSprite {
 
         this.drag.x = 130;
         this.drag.y = 130;
+
+        actionSignal = new FlxTypedSignal<String->Void>();
 
         loadGraphic("assets/images/gwensprite.png", true, 15, 26);
 		animation.add("Default", [3], 5);
@@ -35,11 +39,13 @@ class Player extends FlxSprite {
         var _down:Bool = false;
         var _left:Bool = false;
         var _right:Bool = false;
+        var _action:Bool = false;
 
         _up = FlxG.keys.anyPressed([UP, W]);
         _down = FlxG.keys.anyPressed([DOWN, S]);
         _left = FlxG.keys.anyPressed([LEFT, A]);
         _right = FlxG.keys.anyPressed([RIGHT, D]);
+        _action =  FlxG.keys.anyJustPressed([SPACE]);
 
         if (_up) {
 			animation.play("Up");
@@ -59,6 +65,10 @@ class Player extends FlxSprite {
 			velocity.x = walkSpeed;
 		} else {
 			this.frame = this.frame;
-		}
+        }
+        
+        if(_action) {
+            actionSignal.dispatch("plant");
+        }
     }
 }

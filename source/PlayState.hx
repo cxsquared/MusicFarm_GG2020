@@ -20,17 +20,44 @@ class PlayState extends FlxState
 		map = new MapController();
 
 		FlxG.worldBounds.set(map.tilemap.x, map.tilemap.y, map.tilemap.width, map.tilemap.height);
-
 		FlxG.camera.zoom = 2;
-		FlxG.camera.follow(map.tilemap);
-
 		add(map.tilemap);
+
 		//Cluttering things up because that's how I am
 		player = new Player();
 		add(player);
+		player.actionSignal.add(playerAction);
+
+		FlxG.camera.follow(player);
 
 		fp = new FlowerPicker();
 		add(fp);
+	}
+
+	private function playerAction(action:String):Void {
+
+		var x = Std.int(player.x / MapController.TILE_WIDTH);
+		var y = Std.int(player.y / MapController.TILE_HEIGHT);
+
+		doAction("note", x, y);
+	}
+
+	private function doAction(action:String,x:Int, y:Int) {
+		var currTile = map.getTile(x, y);
+
+		if(action == "activator") {
+			if (!Std.is(currTile, ActivatorTile)) {
+				map.setTile(x, y, new ActivatorTile(map, map.coordsToIndex(x, y)));
+			} else {
+				map.setTile(x, y, new Tile(map, map.coordsToIndex(x, y)));
+			}
+		} else {
+			if (!Std.is(currTile, NoteTile)) {
+				map.setTile(x, y, new NoteTile(map, map.coordsToIndex(x, y)));
+			} else {
+				map.setTile(x, y, new Tile(map, map.coordsToIndex(x, y)));
+			}
+		}
 	}
 
 	override public function update(elapsed:Float):Void
@@ -41,21 +68,12 @@ class PlayState extends FlxState
 			var x = Std.int(FlxG.mouse.x / MapController.TILE_WIDTH);
 			var y = Std.int(FlxG.mouse.y / MapController.TILE_HEIGHT);
 
-			var currTile = map.getTile(x, y);
-
 			if (FlxG.keys.pressed.SHIFT) {
-				if (!Std.is(currTile, ActivatorTile)) {
-					map.setTile(x, y, new ActivatorTile(map, map.coordsToIndex(x, y)));
-				} else {
-					map.setTile(x, y, new Tile(map, map.coordsToIndex(x, y)));
-				}
+				doAction("activator",x,y);
 			} else {
-				if (!Std.is(currTile, NoteTile)) {
-					map.setTile(x, y, new NoteTile(map, map.coordsToIndex(x, y)));
-				} else {
-					map.setTile(x, y, new Tile(map, map.coordsToIndex(x, y)));
-				}
+				doAction("note", x, y);
 			}
+			
 		}
 	}
 }

@@ -11,6 +11,11 @@ class FlowerPicker extends FlxSprite {
     public function new():Void {
         super();
         flowers = [1,2];
+
+        this.x = 0;
+        this.y = 0;
+        //fixed UI
+        //this.scrollFactor.set(0,0);
     }
 
     override public function update(elapsed:Float):Void
