@@ -48,8 +48,6 @@ class FlowerPicker extends FlxGroup {
             nSprite.animation.play("icon");
             //fixed UI
             nSprite.scrollFactor.set(0,0);
-
-            nSprite.loadGraphic(inventoryData[i].icon, true, 16, 16);
             nSprite.x = 200 + (i * 25);
             nSprite.y = 450;
             add(nSprite);
