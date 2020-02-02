@@ -36,6 +36,7 @@ class PlayState extends FlxState
 		FlxG.worldBounds.set(background.x, background.y, background.width, background.height);
 
 		FlxG.camera.zoom = 2;
+		FlxG.camera.setScrollBounds(-32, 288, -32, 288);
 		add(map.tilemap);
 
 		//Cluttering things up because that's how I am
