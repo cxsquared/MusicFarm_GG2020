@@ -1,5 +1,6 @@
 package music;
 
+import flixel.FlxG;
 import flixel.system.FlxSound;
 
 class NoteManager {
@@ -64,17 +65,23 @@ class NoteManager {
 
         return instrumentSounds[instrument][pitch];
     }
+
+    private static var noteLengthTypes = [Quarter, Half, DottedHalf, Whole]; 
+
+    public static function getRandomNoteLengthType() {
+        return noteLengthTypes[FlxG.random.int(0, noteLengthTypes.length-1)];
+    }
 }
 
-enum InstrumentType {
-    Bell;
-    Tuba;
-    Drum;
-    Whistle;
-    String;
-    Organ;
-    Woodwind;
-    Piano;
+enum abstract InstrumentType(Int) {
+    var Bell = 2;
+    var Tuba = 3;
+    var Drum = 4;
+    var Whistle = 5;
+    var String = 6;
+    var Organ = 7;
+    var Woodwind = 8;
+    var Piano = 9;
 }
 
 enum abstract NoteLengthType(Int) {

@@ -5,7 +5,6 @@ import flixel.FlxG;
 class Tile {
     public static var lastUsedId = 0;
 
-    public var tileType = 0;
     public var id:Int;
     public var delayActivate:Bool = false;
 
@@ -23,6 +22,10 @@ class Tile {
 
     public function tryActivate(beat:Int) {
         propagate(beat);
+    }
+
+    public function getTileType() {
+        return 0;
     }
 
     private function onActivate(){
