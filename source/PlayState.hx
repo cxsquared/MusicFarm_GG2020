@@ -61,9 +61,10 @@ class PlayState extends FlxState
 
 		var gv = new GradeView();
 		UIGroup.add(gv);
+		
+		//unlocks / events based on grading and jugement
 		dt.dayStage.add(gv.renderJudgement);
-
-
+		gv.gradeIssued.add(fp.unlockStage);
 	}
 
 	private function playerAction(action:String, instrument:InstrumentType):Void {

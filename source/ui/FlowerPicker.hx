@@ -16,6 +16,8 @@ class FlowerPicker extends FlxGroup {
     private var tween:FlxTween;
     private var inventoryData:Array<IAction>;
 
+    public var unlockMax = 2;
+
     public var actionSignal:FlxTypedSignal<String->InstrumentType->Void>;
 
     public function new():Void {
@@ -47,6 +49,18 @@ class FlowerPicker extends FlxGroup {
             add(nSprite);
             flowers.push(nSprite);
         }
+
+        unlockStage(1);
+    }
+
+    public function unlockStage(stage:Int) {
+        var unlockMax = Math.floor( (stage * .33) * flowers.length);
+
+        for(i in 0 ... flowers.length) {
+            
+            if(i <= unlockMax) flowers[i].alpha = 1;
+            else flowers[i].alpha = .3;
+        }
     }
 
     override public function update(elapsed:Float):Void
@@ -64,7 +78,6 @@ class FlowerPicker extends FlxGroup {
         backward = FlxG.keys.anyJustPressed([R]);
         _action =  FlxG.keys.anyJustPressed([SPACE]);
 
-
         if(forward || backward) {
 
             //stop old animation just in case
@@ -76,10 +89,10 @@ class FlowerPicker extends FlxGroup {
             //move forward
             if(forward) {
                 curIndex ++;
-                if(curIndex >= flowers.length) curIndex = 0;
+                if(curIndex >= unlockMax) curIndex = 0;
             } else if (backward) {
                 curIndex --;
-                if(curIndex < 0) curIndex = flowers.length - 1;
+                if(curIndex < 0) curIndex = unlockMax;
             }
 
             //bounce anim because why not

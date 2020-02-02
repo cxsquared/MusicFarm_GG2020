@@ -3,11 +3,17 @@ package ui;
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
 import flixel.tweens.FlxTween;
+import flixel.util.FlxSignal;
 
 class GradeView extends FlxSpriteGroup {
 
+    public var gradeIssued:FlxTypedSignal<Int->Void>;
+
     public function new():Void {
         super();
+
+        gradeIssued = new FlxTypedSignal<Int->Void>();
+
         this.x = 100;
 
         for(i in 0 ... 5) {
@@ -22,9 +28,10 @@ class GradeView extends FlxSpriteGroup {
 
     public function renderJudgement(judgement:Int) {
         showStars(judgement+1);
-        FlxTween.tween(this, { alpha: 1 }, .4 );   
-    }
+        FlxTween.tween(this, { alpha: 1 }, .4 );
 
+        gradeIssued.dispatch(judgement+1);
+    }
 
     public function showStars(starAmt:Int) {
 
