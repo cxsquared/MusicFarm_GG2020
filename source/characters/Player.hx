@@ -64,7 +64,8 @@ class Player extends FlxSprite {
 			this.facing = FlxObject.RIGHT;
 			velocity.x = walkSpeed;
 		} else {
-			this.frame = this.frame;
+            animation.pause();
+			//this.frame = this.frame;
         }
         
         if(_action) {
