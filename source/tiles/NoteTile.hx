@@ -24,8 +24,8 @@ class NoteTile extends Tile {
         return cast(instrument, Int);
     }
 
-    public override function onActivate() {
-        super.onActivate();
+    public override function onActivate(NoteLength:Int) {
+        super.onActivate(NoteLength);
         if (sound != null) {
             sound.play();
         } else {

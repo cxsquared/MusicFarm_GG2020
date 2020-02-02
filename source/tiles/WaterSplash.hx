@@ -7,10 +7,12 @@ class WaterSplash extends FlxSprite {
 
     public var lifeTimer = new FlxTimer();
 
-    public function new(X:Float, Y:Float) {
+    public function new(X:Float, Y:Float, NoteLength:Int) {
         super(X, Y, "assets/images/water_temp.png");
 
-        lifeTimer.start(MapController.getDelay(), onTimer);
+        this.alpha = .2;
+
+        lifeTimer.start(MapController.getDelay()*NoteLength, onTimer);
     }
 
     private function onTimer(t:FlxTimer) {

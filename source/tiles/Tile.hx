@@ -1,5 +1,6 @@
 package tiles;
 
+import flixel.math.FlxMath;
 import flixel.FlxG;
 
 class Tile {
@@ -28,10 +29,10 @@ class Tile {
         return 0;
     }
 
-    private function onActivate(){
+    private function onActivate(NoteLength:Int){
         var coords = tilemap.getTileCoordsByIndex(index);
         var position = tilemap.tilemap.getPosition(); 
-        FlxG.state.add(new WaterSplash(position.x + coords.x * 16, position.y + coords.y * 16));
+        FlxG.state.add(new WaterSplash(position.x + (coords.x * MapController.TILE_WIDTH), position.y + (coords.y * MapController.TILE_HEIGHT), NoteLength));
     }
 
     private function propagate(beat:Int) {
@@ -45,9 +46,11 @@ class Tile {
 
         var neighbors = getNeighbors();
         var activate = false;
+        var longestNoteLength = 1;
 
         for(pd in propagations) {
             if (pd.shouldPropagate(beat)) {
+                longestNoteLength = Std.int(Math.max(longestNoteLength, cast(pd.noteLength, Int)));
                 activate = true;
                 // Ugh don't like this nested for
                 for(neighbor in neighbors) {
@@ -62,7 +65,7 @@ class Tile {
         }
 
         if (activate)
-            onActivate();
+            onActivate(longestNoteLength);
     }
 
     public function setActivate(Data:PropagateData, Delay:Bool) {

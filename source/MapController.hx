@@ -97,7 +97,7 @@ class MapController {
     
     public function getTileCoordsByIndex(Index:Int):FlxPoint {
         var x = Index % width();
-        var y = Index / width();
+        var y = Math.floor(Index / width());
 
 
         return FlxPoint.weak(x, y);
