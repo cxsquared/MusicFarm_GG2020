@@ -15,10 +15,13 @@ class NoteTile extends Tile {
 
         instrument = Instrument;
 
-        tileType = 2;
         var coords = Tilemap.getTileCoordsByIndex(Index);
 
         sound = NoteManager.getInstrumentSound(instrument, Std.int(coords.y));
+    }
+
+    public override function getTileType() {
+        return cast(instrument, Int);
     }
 
     public override function onActivate() {

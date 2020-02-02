@@ -83,7 +83,7 @@ class MapController {
         if (!inRange(X, Y))
             return;
 
-        tilemap.setTile(X, Y, Tile.tileType);
+        tilemap.setTile(X, Y, Tile.getTileType());
         tileData[coordsToIndex(X, Y)] = Tile;
     }
 

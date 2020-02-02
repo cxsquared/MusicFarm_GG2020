@@ -12,9 +12,11 @@ class ActivatorTile extends Tile {
     public function new(Tilemap:MapController, Index:Int, NoteLength:NoteLengthType=NoteLengthType.Quarter) {
         super(Tilemap, Index);
 
-        noteLength = NoteLength; 
+        noteLength = NoteManager.getRandomNoteLengthType(); 
+    }
 
-        tileType = 1;
+    public override function getTileType() {
+        return 1;
     }
 
     public function tryStart(beat:Int) {
