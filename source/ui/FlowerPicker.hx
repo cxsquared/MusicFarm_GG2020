@@ -45,6 +45,7 @@ class FlowerPicker extends FlxGroup {
             var nSprite = new FlxSprite();
             nSprite.loadGraphic(inventoryData[i].icon, true, MapController.TILE_WIDTH, MapController.TILE_HEIGHT);
             nSprite.animation.add("icon", [i+1]);
+            nSprite.animation.add("highlight", [i+11]);
             nSprite.animation.play("icon");
             //fixed UI
             nSprite.scrollFactor.set(0,0);
@@ -55,6 +56,9 @@ class FlowerPicker extends FlxGroup {
         }
 
         unlockStage(1);
+
+        FlxTween.tween(flowers[0], { y: 430 }, .7, { ease: FlxEase.quadOut});
+        flowers[0].animation.play("highlight");
     }
 
     public function unlockStage(stage:Int) {
@@ -78,8 +82,8 @@ class FlowerPicker extends FlxGroup {
         var backward:Bool = false;
         var _action:Bool = false;
 
-        forward = FlxG.keys.anyJustPressed([F]);
-        backward = FlxG.keys.anyJustPressed([R]);
+        forward = FlxG.keys.anyJustPressed([F, E]);
+        backward = FlxG.keys.anyJustPressed([R, Q]);
         _action =  FlxG.keys.anyJustPressed([SPACE]);
 
         if(forward || backward) {
@@ -89,6 +93,7 @@ class FlowerPicker extends FlxGroup {
 
             //bounce anim because why not
             FlxTween.tween(flowers[curIndex], { y: 450 }, .7, { ease: FlxEase.quadOut});
+            flowers[curIndex].animation.play("icon");
 
             //move forward
             if(forward) {
@@ -101,6 +106,7 @@ class FlowerPicker extends FlxGroup {
 
             //bounce anim because why not
             tween = FlxTween.tween(flowers[curIndex], { y: 430 }, .7, { ease: FlxEase.quadOut});
+            flowers[curIndex].animation.play("highlight");
         }
 
 
