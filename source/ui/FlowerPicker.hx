@@ -54,7 +54,7 @@ class FlowerPicker extends FlxGroup {
     }
 
     public function unlockStage(stage:Int) {
-        var unlockMax = Math.floor( (stage * .33) * flowers.length);
+        unlockMax = Math.floor( (stage * .33) * flowers.length);
 
         for(i in 0 ... flowers.length) {
             

@@ -10,7 +10,7 @@ import GameOverState;
 
 class DayTimer extends FlxBar {
 
-    private var gameDuration:Int = 6;
+    private var gameDuration:Int = 60;
     private var timer:FlxTimer;
     private var stage = 0;
     
