@@ -35,7 +35,7 @@ class MapController {
 
     public function new() {
         tilemap = new FlxTilemap();
-        tilemap.loadMapFromArray(MAP, TILE_WIDTH, TILE_HEIGHT, "assets/images/temp_tiles.png", TILE_WIDTH, TILE_HEIGHT);
+        tilemap.loadMapFromArray(MAP, TILE_WIDTH, TILE_HEIGHT, "assets/images/flowers.png", TILE_WIDTH, TILE_HEIGHT);
 
         var currIdx = 0;
         

@@ -1,5 +1,6 @@
 package ui;
 
+import flixel.graphics.frames.FlxFrame;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.FlxG;
@@ -27,15 +28,15 @@ class FlowerPicker extends FlxGroup {
 
 
         inventoryData = [
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "activator" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Tuba, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Drum, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Whistle, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.String, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Organ, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Woodwind, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Piano, aType: "flower" }
+            { icon: "assets/images/icons/activatoricon.png", instrument: InstrumentType.Bell, aType: "activator" },
+            { icon: "assets/images/icons/bellicon.png", instrument: InstrumentType.Bell, aType: "flower" },
+            { icon: "assets/images/icons/tubaicon.png", instrument: InstrumentType.Tuba, aType: "flower" },
+            { icon: "assets/images/icons/drumicon.png", instrument: InstrumentType.Drum, aType: "flower" },
+            { icon: "assets/images/icons/whistleicon.png", instrument: InstrumentType.Whistle, aType: "flower" },
+            { icon: "assets/images/icons/stringicon.png", instrument: InstrumentType.String, aType: "flower" },
+            { icon: "assets/images/icons/organicon.png", instrument: InstrumentType.Organ, aType: "flower" },
+            { icon: "assets/images/icons/woodwindicon.png", instrument: InstrumentType.Woodwind, aType: "flower" },
+            { icon: "assets/images/icons/pianoicon.png", instrument: InstrumentType.Piano, aType: "flower" }
         ];
 
         flowers =  new Array<FlxSprite>();
@@ -44,6 +45,8 @@ class FlowerPicker extends FlxGroup {
             var nSprite = new FlxSprite();
             //fixed UI
             nSprite.scrollFactor.set(0,0);
+
+            nSprite.loadGraphic(inventoryData[i].icon, true, 16, 16);
             nSprite.x = 200 + (i * 25);
             nSprite.y = 450;
             add(nSprite);
