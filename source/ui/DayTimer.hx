@@ -13,7 +13,12 @@ class DayTimer extends FlxBar {
         super();
         new FlxTimer().start(180.0, eOver, 1);
 
-        FlxTween.tween(this, {} , 180.0);
+        this.value = 100;
+        FlxTween.tween(this, { value: 0 } , 180.0);
+
+        this.scrollFactor.set(0,0);
+        this.x = 400;
+        this.y = 400;
     }
 
     private function eOver(timer:FlxTimer) {

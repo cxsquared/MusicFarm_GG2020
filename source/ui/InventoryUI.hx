@@ -13,5 +13,5 @@ class InventoryUI extends FlxGroup {
         flowerPicker = new FlowerPicker();
         add(flowerPicker);
     }
-
+    
 }

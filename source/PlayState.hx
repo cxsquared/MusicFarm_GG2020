@@ -5,16 +5,17 @@ import tiles.*;
 import flixel.FlxState;
 import flixel.FlxG;
 import characters.Player;
-import ui.InventoryUI;
+import flixel.group.FlxGroup;
 import ui.FlowerPicker;
+import ui.DayTimer;
 import flixel.FlxSprite;
 
 class PlayState extends FlxState
 {
 	public var map:MapController;
 
+	private var UIGroup:FlxGroup;
 	private var player:Player;
-	private var inventoryUI:InventoryUI;
 	private var fp:FlowerPicker;
 
 	private var noteManager = new NoteManager();
@@ -25,17 +26,10 @@ class PlayState extends FlxState
 	{
 		super.create();
 
+		/////////Map stuff//////
 		background.loadGraphic("assets/images/background.png");
 		background.setPosition(-32, -32);
 		add(background);
-
-		//inventoryUI = new InventoryUI();
-		//add(inventoryUI);
-
-		fp = new FlowerPicker();
-		add(fp);
-		fp.actionSignal.add(playerAction);
-
 
 		map = new MapController();
 
@@ -49,6 +43,19 @@ class PlayState extends FlxState
 		add(player);
 
 		FlxG.camera.follow(player);
+
+
+		////////////UI STuff/////////////
+		fp = new FlowerPicker();
+		add(fp);
+		fp.actionSignal.add(playerAction);
+
+		UIGroup = new FlxGroup();
+		add(UIGroup);
+		
+		//Countless countdowns
+		var dt = new DayTimer();
+		UIGroup.add(dt);
 	}
 
 	private function playerAction(action:String):Void {
