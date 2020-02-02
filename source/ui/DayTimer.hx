@@ -54,7 +54,7 @@ class DayTimer extends FlxBar {
     }
 
     private function eOver(timer:FlxTimer) {
-        FlxG.switchState(new GameOverState()); 
+        //FlxG.switchState(new GameOverState()); 
     }
 
 }
