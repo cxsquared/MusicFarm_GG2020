@@ -26,7 +26,6 @@ class FlowerPicker extends FlxGroup {
 
         actionSignal = new FlxTypedSignal<String->InstrumentType->Void>();
 
-
         inventoryData = [
             { icon: "assets/images/flowers.png", instrument: InstrumentType.Bell, aType: "activator" },
             { icon: "assets/images/flowers.png", instrument: InstrumentType.Bell, aType: "flower" },
@@ -59,6 +58,7 @@ class FlowerPicker extends FlxGroup {
 
         FlxTween.tween(flowers[0], { y: 430 }, .7, { ease: FlxEase.quadOut});
         flowers[0].animation.play("highlight");
+
     }
 
     public function unlockStage(stage:Int) {

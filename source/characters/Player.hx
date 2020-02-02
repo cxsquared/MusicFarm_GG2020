@@ -8,6 +8,9 @@ import flixel.util.FlxSignal;
 class Player extends FlxSprite {
 
     private var walkSpeed:Int;
+    private var spacebar:FlxSprite;
+    private var e:FlxSprite;
+    private var q:FlxSprite;
     public var actionSignal:FlxTypedSignal<String->Void>;
 
     public function new() {
@@ -24,12 +27,35 @@ class Player extends FlxSprite {
 		animation.add("Up", [0, 1], 5);
 		animation.add("Down", [2, 3], 5);
 		animation.add("Right", [4, 5], 5);
-		animation.add("Left", [6, 7], 5);
+        animation.add("Left", [6, 7], 5);
+        
+        spacebar = new FlxSprite();
+        spacebar.loadGraphic("assets/images/spacebar.png");
+        spacebar.scale.set(.8, .8);
+        FlxG.state.add(spacebar);
+
+        q = new FlxSprite();
+        q.loadGraphic("assets/images/q.png");
+        FlxG.state.add(q);
+
+        e = new FlxSprite();
+        e.loadGraphic("assets/images/e.png");
+        FlxG.state.add(e);
     }
 
     override public function update(elapsed:Float):Void
     {
         movement();
+
+        spacebar.x = this.x + this.width/2 - spacebar.width/2;
+        spacebar.y = this.y + this.height + 2;
+
+        q.x = this.x - q.width - 2;
+        q.y = this.y + 2;
+
+        e.x = this.x + this.width + 2;
+        e.y = this.y + 2;
+
         super.update(elapsed);
     }
 
