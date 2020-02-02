@@ -1,11 +1,12 @@
 package ui;
 
 import flixel.FlxSprite;
+import music.NoteManager;
 
 typedef IAction = {
     var icon:String;
-    var action:Void->Void;
     var aType:String;
+    var instrument:InstrumentType;
 }
 
 class InventoryAction {

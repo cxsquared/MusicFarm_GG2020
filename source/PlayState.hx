@@ -58,15 +58,15 @@ class PlayState extends FlxState
 		UIGroup.add(dt);
 	}
 
-	private function playerAction(action:String):Void {
+	private function playerAction(action:String, instrument:InstrumentType):Void {
 
 		var x = Std.int(player.x / MapController.TILE_WIDTH);
 		var y = Std.int(player.y / MapController.TILE_HEIGHT);
 
-		doAction(action, x, y);
+		doAction(x, y, action, instrument);
 	}
 
-	private function doAction(action:String,x:Int, y:Int) {
+	private function doAction(x:Int, y:Int, action:String, instrument:InstrumentType = InstrumentType.Bell) {
 		var currTile = map.getTile(x, y);
 
 		if(action == "activator") {
@@ -77,7 +77,7 @@ class PlayState extends FlxState
 			}
 		} else {
 			if (!Std.is(currTile, NoteTile)) {
-				map.setTile(x, y, new NoteTile(map, map.coordsToIndex(x, y)));
+				map.setTile(x, y, new NoteTile(map, map.coordsToIndex(x, y), instrument));
 			} else {
 				map.setTile(x, y, new Tile(map, map.coordsToIndex(x, y)));
 			}

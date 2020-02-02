@@ -7,6 +7,7 @@ import flixel.tweens.FlxTween;
 import flixel.tweens.FlxEase;
 import ui.InventoryAction;
 import flixel.util.FlxSignal;
+import music.NoteManager;
 
 class FlowerPicker extends FlxGroup {
 
@@ -15,17 +16,24 @@ class FlowerPicker extends FlxGroup {
     private var tween:FlxTween;
     private var inventoryData:Array<IAction>;
 
-    public var actionSignal:FlxTypedSignal<String->Void>;
+    public var actionSignal:FlxTypedSignal<String->InstrumentType->Void>;
 
     public function new():Void {
         super();
 
-        actionSignal = new FlxTypedSignal<String->Void>();
+        actionSignal = new FlxTypedSignal<String->InstrumentType->Void>();
 
 
         inventoryData = [
-            { icon: "assets/images/temp_tiles.png", action: function() { trace("AAAA"); }, aType: "activator" },
-            { icon: "assets/images/temp_tiles.png", action: function() { trace("AAAA"); }, aType: "flower" }
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "activator" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Tuba, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Drum, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Whistle, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.String, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Organ, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Woodwind, aType: "flower" },
+            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Piano, aType: "flower" }
         ];
 
         flowers =  new Array<FlxSprite>();
@@ -34,8 +42,8 @@ class FlowerPicker extends FlxGroup {
             var nSprite = new FlxSprite();
             //fixed UI
             nSprite.scrollFactor.set(0,0);
-            nSprite.x = 300 + (i * 30);
-            nSprite.y = 250 ;
+            nSprite.x = 200 + (i * 25);
+            nSprite.y = 450;
             add(nSprite);
             flowers.push(nSprite);
         }
@@ -60,10 +68,10 @@ class FlowerPicker extends FlxGroup {
         if(forward || backward) {
 
             //stop old animation just in case
-            if(tween != null) tween.cancel();
+            //if(tween != null) tween.cancel();
 
             //bounce anim because why not
-            FlxTween.tween(flowers[curIndex], { y: 250 }, .7, { ease: FlxEase.quadOut});
+            FlxTween.tween(flowers[curIndex], { y: 450 }, .7, { ease: FlxEase.quadOut});
 
             //move forward
             if(forward) {
@@ -75,12 +83,12 @@ class FlowerPicker extends FlxGroup {
             }
 
             //bounce anim because why not
-            tween = FlxTween.tween(flowers[curIndex], { y: 270 }, .7, { ease: FlxEase.quadOut});
+            tween = FlxTween.tween(flowers[curIndex], { y: 430 }, .7, { ease: FlxEase.quadOut});
         }
 
 
         if(_action) {
-            actionSignal.dispatch(inventoryData[curIndex].aType);
+            actionSignal.dispatch(inventoryData[curIndex].aType, inventoryData[curIndex].instrument);
         }
     }
 }
