@@ -14,7 +14,8 @@ class GradeView extends FlxSpriteGroup {
 
         gradeIssued = new FlxTypedSignal<Int->Void>();
 
-        this.x = 100;
+        this.y = -30;
+        this.x = 106;
 
         for(i in 0 ... 5) {
             var newStar = new FlxSprite();
