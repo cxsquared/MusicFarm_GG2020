@@ -27,9 +27,8 @@ class DayTimer extends FlxBar {
 
         dayStage = new FlxTypedSignal<Int->Void>();
 
-        this.scrollFactor.set(0,0);
-        this.x = 190;
-        this.y = 170;
+        this.x = -190;
+        this.y = -170;
     }
 
     override public function update(elapsed:Float):Void

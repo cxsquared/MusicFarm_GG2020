@@ -10,7 +10,7 @@ class WaterSplash extends FlxSprite {
     public function new(X:Float, Y:Float, NoteLength:Int) {
         super(X, Y, "assets/images/water_temp.png");
 
-        this.alpha = .8;
+        this.alpha = .7;
 
         lifeTimer.start(MapController.getDelay()*NoteLength, onTimer);
     }
