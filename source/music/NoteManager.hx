@@ -24,11 +24,13 @@ class NoteManager {
 
             //organ
             s = new FlxSound();
+            s.volume = .25;
             s.loadEmbedded('assets/sounds/organ$i.wav');
             instrumentSounds[InstrumentType.Organ].push(s);
 
             // string
             s = new FlxSound();
+            s.volume = .25;
             s.loadEmbedded('assets/sounds/string$i.wav');
             instrumentSounds[InstrumentType.String].push(s);
 
@@ -39,21 +41,24 @@ class NoteManager {
 
             // piano 
             s = new FlxSound();
+            s.volume = .25;
             s.loadEmbedded('assets/sounds/piano$i.wav');
             instrumentSounds[InstrumentType.Piano].push(s);
 
-            // piano 
+            // woodwind 
             s = new FlxSound();
             s.loadEmbedded('assets/sounds/woodwind$i.wav');
             instrumentSounds[InstrumentType.Woodwind].push(s);
 
             // whistle 
             s = new FlxSound();
+            s.volume = .25;
             s.loadEmbedded('assets/sounds/whistle$i.wav');
             instrumentSounds[InstrumentType.Whistle].push(s);
 
             // drum 
             s = new FlxSound();
+            s.volume = .15;
             s.loadEmbedded('assets/sounds/drum$i.wav');
             instrumentSounds[InstrumentType.Drum].push(s);
         }
