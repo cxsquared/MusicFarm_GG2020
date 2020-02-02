@@ -93,7 +93,7 @@ class FlowerPicker extends FlxGroup {
             //move forward
             if(forward) {
                 curIndex ++;
-                if(curIndex >= unlockMax) curIndex = 0;
+                if(curIndex > unlockMax) curIndex = 0;
             } else if (backward) {
                 curIndex --;
                 if(curIndex < 0) curIndex = unlockMax;
