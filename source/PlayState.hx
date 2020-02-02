@@ -1,5 +1,6 @@
 package;
 
+import ui.GradeView;
 import music.NoteManager;
 import tiles.*;
 import flixel.FlxState;
@@ -43,7 +44,7 @@ class PlayState extends FlxState
 		player = new Player();
 		add(player);
 
-		FlxG.camera.follow(player);
+		//FlxG.camera.follow(player);
 
 
 		////////////UI STuff/////////////
@@ -57,6 +58,12 @@ class PlayState extends FlxState
 		//Countless countdowns
 		var dt = new DayTimer();
 		UIGroup.add(dt);
+
+		var gv = new GradeView();
+		UIGroup.add(gv);
+		dt.dayStage.add(gv.renderJudgement);
+
+
 	}
 
 	private function playerAction(action:String, instrument:InstrumentType):Void {

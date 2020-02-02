@@ -2,6 +2,7 @@ package ui;
 
 import flixel.FlxSprite;
 import flixel.group.FlxSpriteGroup;
+import flixel.tweens.FlxTween;
 
 class GradeView extends FlxSpriteGroup {
 
@@ -15,7 +16,15 @@ class GradeView extends FlxSpriteGroup {
             newStar.x = i * 30;
             add(newStar);
         }
+
+        showStars(0);
     }
+
+    public function renderJudgement(judgement:Int) {
+        showStars(judgement+1);
+        FlxTween.tween(this, { alpha: 1 }, .4 );   
+    }
+
 
     public function showStars(starAmt:Int) {
 
@@ -23,7 +32,7 @@ class GradeView extends FlxSpriteGroup {
             sp.visible = false;
         });
 
-        for(i in 0 ... 5) {
+        for(i in 0 ... starAmt) {
             this.members[i].visible = true;
         }
     }
