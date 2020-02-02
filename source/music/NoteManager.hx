@@ -78,8 +78,8 @@ enum InstrumentType {
 }
 
 enum abstract NoteLengthType(Int) {
-    var Quarter;
-    var Half;
+    var Quarter = 1;
+	var Half;
     var DottedHalf;
     var Whole;
 }

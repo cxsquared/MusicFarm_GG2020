@@ -81,6 +81,7 @@ class PlayState extends FlxState
 	{
 		super.update(elapsed);
 
+		/*
 		if (FlxG.mouse.justPressed) {
 			var x = Std.int(FlxG.mouse.x / MapController.TILE_WIDTH);
 			var y = Std.int(FlxG.mouse.y / MapController.TILE_HEIGHT);
@@ -92,5 +93,6 @@ class PlayState extends FlxState
 			}
 			
 		}
+		*/
 	}
 }

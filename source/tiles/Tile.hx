@@ -3,7 +3,7 @@ package tiles;
 import flixel.FlxG;
 
 class Tile {
-    static var lastUsedId = 0;
+    public static var lastUsedId = 0;
 
     public var tileType = 0;
     public var id:Int;

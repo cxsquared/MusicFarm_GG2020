@@ -1,6 +1,5 @@
 package ui;
 
-import js.lib.Object;
 import flixel.group.FlxGroup;
 import flixel.FlxSprite;
 import flixel.FlxG;
