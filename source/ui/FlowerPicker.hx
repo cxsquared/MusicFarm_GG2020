@@ -27,21 +27,24 @@ class FlowerPicker extends FlxGroup {
 
 
         inventoryData = [
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "activator" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Bell, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Tuba, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Drum, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Whistle, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.String, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Organ, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Woodwind, aType: "flower" },
-            { icon: "assets/images/temp_tiles.png", instrument: InstrumentType.Piano, aType: "flower" }
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Bell, aType: "activator" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Bell, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Tuba, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Drum, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Whistle, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.String, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Organ, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Woodwind, aType: "flower" },
+            { icon: "assets/images/flowers.png", instrument: InstrumentType.Piano, aType: "flower" }
         ];
 
         flowers =  new Array<FlxSprite>();
   
         for (i in 0...inventoryData.length) {
             var nSprite = new FlxSprite();
+            nSprite.loadGraphic(inventoryData[i].icon, true, MapController.TILE_WIDTH, MapController.TILE_HEIGHT);
+            nSprite.animation.add("icon", [i+1]);
+            nSprite.animation.play("icon");
             //fixed UI
             nSprite.scrollFactor.set(0,0);
             nSprite.x = 200 + (i * 25);
